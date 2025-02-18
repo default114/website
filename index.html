@@ -12,7 +12,7 @@
         }
         body {
             font-family: 'Helvetica', sans-serif;
-          background-color: #000000;
+            background-color: #000000;
             color: white;
             height: 100vh;
             display: flex;
@@ -64,10 +64,38 @@
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+        .quiz-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: none; /* Initially hidden */
+        }
+        .quiz-question {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            margin-top: 20px; /* Add space before question */
+        }
+        .quiz-options {
+            margin: 10px 0;
+        }
+        .quiz-options input {
+            margin-right: 10px;
+        }
+        .result-message {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        .score {
+            font-size: 2em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Birthday Message Section -->
         <h1>Happy Birthday Chris!</h1>
         <p>LEBRON IS THE FUCKING GOAAAAAAAAAAAAT!</p>
         <div class="balloons">🐐🐐🐐</div>
@@ -75,11 +103,125 @@
             <img src="https://static.wikia.nocookie.net/13ac7195-af49-44be-959f-25f4411c3fd4/scale-to-width/755" alt="LeBron James, The GOAT">
         </div>
         <br>
-        <button class="button" onclick="alert('You are a true LeBron fan!')">Click if you love LeBron</button>
+        <button class="button" onclick="startQuiz()">Click if you love LeBron</button>
+
+        <!-- Quiz Section -->
+        <div class="quiz-container" id="quiz">
+            <h2>LeBron James Quiz!</h2>
+
+            <!-- Question 2 -->
+            <div class="quiz-question" id="question2">How many NBA championships has LeBron won?</div>
+            <div class="quiz-options">
+                <input type="radio" name="q2" id="q2-a" value="4"> 4<br>
+                <input type="radio" name="q2" id="q2-b" value="5"> 5<br>
+                <input type="radio" name="q2" id="q2-c" value="6"> 6<br>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-question" id="question3">What year did LeBron first enter the NBA?</div>
+            <div class="quiz-options">
+                <input type="radio" name="q3" id="q3-a" value="2003"> 2003<br>
+                <input type="radio" name="q3" id="q3-b" value="2001"> 2001<br>
+                <input type="radio" name="q3" id="q3-c" value="2004"> 2004<br>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="quiz-question" id="question4">What is LeBron's nickname?</div>
+            <div class="quiz-options">
+                <input type="radio" name="q4" id="q4-a" value="King James"> King James<br>
+                <input type="radio" name="q4" id="q4-b" value="The King"> The King<br>
+                <input type="radio" name="q4" id="q4-c" value="King of LA"> King of LA<br>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="quiz-question" id="question5">Which team did LeBron play for in 2010-2014?</div>
+            <div class="quiz-options">
+                <input type="radio" name="q5" id="q5-a" value="Miami Heat"> Miami Heat<br>
+                <input type="radio" name="q5" id="q5-b" value="Cleveland Cavaliers"> Cleveland Cavaliers<br>
+                <input type="radio" name="q5" id="q5-c" value="Los Angeles Lakers"> Los Angeles Lakers<br>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="quiz-question" id="question6">How many MVP awards does LeBron have?</div>
+            <div class="quiz-options">
+                <input type="radio" name="q6" id="q6-a" value="4"> 4<br>
+                <input type="radio" name="q6" id="q6-b" value="2"> 2<br>
+                <input type="radio" name="q6" id="q6-c" value="3"> 3<br>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="quiz-question" id="question7">LeBron was drafted in which position?</div>
+            <div class="quiz-options">
+                <input type="radio" name="q7" id="q7-a" value="1st Overall"> 1st Overall<br>
+                <input type="radio" name="q7" id="q7-b" value="5th Overall"> 5th Overall<br>
+                <input type="radio" name="q7" id="q7-c" value="10th Overall"> 10th Overall<br>
+            </div>
+
+            <button class="button" onclick="checkAnswers()">Submit Quiz</button>
+        </div>
+
+        <div id="result" class="result-message"></div>
+        <div id="score" class="score"></div>
     </div>
+
     <audio autoplay loop>
         <source src="https://raw.githack.com/default114/website/main/test.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
+    <script>
+        function startQuiz() {
+            // Hide the birthday section and show the quiz
+            document.querySelector(".container h1").style.display = "none";
+            document.querySelector(".container p").style.display = "none";
+            document.querySelector(".container .balloons").style.display = "none";
+            document.querySelector(".container .image-container").style.display = "none";
+            document.querySelector(".container .button").style.display = "none";
+            document.querySelector(".quiz-container").style.display = "block";
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            let resultMessage = "";
+
+            // Question 2
+            let q2 = document.querySelector('input[name="q2"]:checked');
+            if (q2 && q2.value === "4") score++;
+
+            // Question 3
+            let q3 = document.querySelector('input[name="q3"]:checked');
+            if (q3 && q3.value === "2003") score++;
+
+            // Question 4
+            let q4 = document.querySelector('input[name="q4"]:checked');
+            if (q4 && q4.value === "King James") score++;
+
+            // Question 5
+            let q5 = document.querySelector('input[name="q5"]:checked');
+            if (q5 && q5.value === "Miami Heat") score++;
+
+            // Question 6
+            let q6 = document.querySelector('input[name="q6"]:checked');
+            if (q6 && q6.value === "4") score++;
+
+            // Question 7
+            let q7 = document.querySelector('input[name="q7"]:checked');
+            if (q7 && q7.value === "1st Overall") score++;
+
+            // Display numerical score
+            document.getElementById("score").innerText = "Your score: " + score + "/6";
+
+            // Display message based on score
+            if (score === 6) {
+                resultMessage = "🎉 Perfect! You are a true LeBron expert!";
+            } else if (score >= 4) {
+                resultMessage = "Not bad! You're a big LeBron fan!";
+            } else {
+                resultMessage = "Keep learning, you're getting there!";
+            }
+
+            document.getElementById("result").innerText = resultMessage;
+        }
+    </script>
 </body>
 </html>
